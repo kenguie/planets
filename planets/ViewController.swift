@@ -19,6 +19,14 @@ class ViewController: UIViewController {
         self.sceneView.session.run(configuration)
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let earth = SCNNode()
+        earth.geometry = SCNSphere(radius: 0.3)
+        earth.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Earth day")
+        earth.position = SCNVector3(0,0, -1)
+        self.sceneView.scene.rootNode.addChildNode(earth)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
