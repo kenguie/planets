@@ -15,8 +15,9 @@ class ViewController: UIViewController {
     let configuration = ARWorldTrackingConfiguration()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+        // self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         self.sceneView.session.run(configuration)
+        self.sceneView.autoenablesDefaultLighting = true
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -24,6 +25,9 @@ class ViewController: UIViewController {
         let earth = SCNNode()
         earth.geometry = SCNSphere(radius: 0.3)
         earth.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Earth day")
+        earth.geometry?.firstMaterial?.specular.contents = #imageLiteral(resourceName: "Earth specular")
+        earth.geometry?.firstMaterial?.emission.contents = #imageLiteral(resourceName: "Earth emission")
+        earth.geometry?.firstMaterial?.normal.contents = #imageLiteral(resourceName: "Earth normal")
         earth.position = SCNVector3(0,0, -1)
         self.sceneView.scene.rootNode.addChildNode(earth)
         
