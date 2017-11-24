@@ -28,14 +28,9 @@ class ViewController: UIViewController {
         self.sceneView.scene.rootNode.addChildNode(sun)
         
         let earth = planet(geometry: SCNSphere(radius: 0.2), diffuse: #imageLiteral(resourceName: "Earth day"), specular: #imageLiteral(resourceName: "Earth specular"), emission: #imageLiteral(resourceName: "Earth emission"), normal: #imageLiteral(resourceName: "Earth normal"), position: SCNVector3(1.2, 0, 0))
-//        earth.geometry = SCNSphere(radius: 0.3)
-//        earth.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Earth day")
-//        earth.geometry?.firstMaterial?.specular.contents = #imageLiteral(resourceName: "Earth specular")
-//        earth.geometry?.firstMaterial?.emission.contents = #imageLiteral(resourceName: "Earth emission")
-//        earth.geometry?.firstMaterial?.normal.contents = #imageLiteral(resourceName: "Earth normal")
-//        earth.position = SCNVector3(1.2, 0, 0)
-//        self.sceneView.scene.rootNode.addChildNode(earth)
+        let venus = planet(geometry: SCNSphere(radius: 0.1), diffuse: #imageLiteral(resourceName: "Venus diffuse"), specular: nil, emission: #imageLiteral(resourceName: "Venus emission"), normal: nil, position: SCNVector3(0.7, 0, 0))
         sun.addChildNode(earth)
+        sun.addChildNode(venus)
         
 //        let action = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 24)
 //        let forever = SCNAction.repeatForever(action)
