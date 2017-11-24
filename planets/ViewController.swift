@@ -22,19 +22,36 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let earth = SCNNode()
-        earth.geometry = SCNSphere(radius: 0.3)
-        earth.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Earth day")
-        earth.geometry?.firstMaterial?.specular.contents = #imageLiteral(resourceName: "Earth specular")
-        earth.geometry?.firstMaterial?.emission.contents = #imageLiteral(resourceName: "Earth emission")
-        earth.geometry?.firstMaterial?.normal.contents = #imageLiteral(resourceName: "Earth normal")
-        earth.position = SCNVector3(0,0, -1)
-        self.sceneView.scene.rootNode.addChildNode(earth)
+        let sun = SCNNode(geometry: SCNSphere(radius: 0.35))
+        sun.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun diffuse")
+        sun.position = SCNVector3(0, 0, -1)
+        self.sceneView.scene.rootNode.addChildNode(sun)
         
-        let action = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 24)
-        let forever = SCNAction.repeatForever(action)
-        earth.runAction(forever)
+        let earth = planet(geometry: SCNSphere(radius: 0.2), diffuse: #imageLiteral(resourceName: "Earth day"), specular: #imageLiteral(resourceName: "Earth specular"), emission: #imageLiteral(resourceName: "Earth emission"), normal: #imageLiteral(resourceName: "Earth normal"), position: SCNVector3(1.2, 0, 0))
+//        earth.geometry = SCNSphere(radius: 0.3)
+//        earth.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Earth day")
+//        earth.geometry?.firstMaterial?.specular.contents = #imageLiteral(resourceName: "Earth specular")
+//        earth.geometry?.firstMaterial?.emission.contents = #imageLiteral(resourceName: "Earth emission")
+//        earth.geometry?.firstMaterial?.normal.contents = #imageLiteral(resourceName: "Earth normal")
+//        earth.position = SCNVector3(1.2, 0, 0)
+//        self.sceneView.scene.rootNode.addChildNode(earth)
+        sun.addChildNode(earth)
+        
+//        let action = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 24)
+//        let forever = SCNAction.repeatForever(action)
+//        earth.runAction(forever)
     }
+    
+    func planet(geometry: SCNGeometry, diffuse: UIImage, specular: UIImage?, emission: UIImage?, normal: UIImage?, position: SCNVector3) -> SCNNode {
+        let planet = SCNNode(geometry: geometry)
+        planet.geometry?.firstMaterial?.diffuse.contents = diffuse
+        planet.geometry?.firstMaterial?.specular.contents = specular
+        planet.geometry?.firstMaterial?.emission.contents = emission
+        planet.geometry?.firstMaterial?.normal.contents = normal
+        planet.position = position
+        return planet
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
